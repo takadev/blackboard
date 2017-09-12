@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const GREEN = '#124829';
+const GREEN = '#0F4128';
 const WHITE = '#ffffff';
 const BLACK = '#404B46';
 const RED = '#f7abad'
@@ -26,7 +26,8 @@ let green = [
 	'dt',
 	'dd',
 	'span',
-	'a'
+	'a',
+	'footer'
 ];
 let white = [
 	'h1',
@@ -67,8 +68,8 @@ function change() {
 	$.each(black, function(){
 		$(this).css({
 			'background':BLACK,
-			'color':WHITE,
-			'background-color':BLACK
+			'background-color':BLACK,
+			'color':WHITE
 		});
 	});
 	$.each(white, function(){
