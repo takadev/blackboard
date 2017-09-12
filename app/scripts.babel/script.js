@@ -1,5 +1,10 @@
 import $ from 'jquery';
 
+const GREEN = '#124829';
+const WHITE = '#ffffff';
+const BLACK = '#404B46';
+const RED = '#f7abad'
+
 let green = [
 	'h1',
 	'h2',
@@ -8,6 +13,7 @@ let green = [
 	'body',
 	'header',
 	'article',
+	'section',
 	'div',
 	'blockquote',
 	'table',
@@ -16,11 +22,11 @@ let green = [
 	'td',
 	'ul',
 	'li',
+	'dl',
+	'dt',
+	'dd',
+	'span',
 	'a'
-];
-let black = [
-	'pre',
-	'code'
 ];
 let white = [
 	'h1',
@@ -34,8 +40,14 @@ let white = [
 	'strong',
 	'td',
 	'cite',
+	'code',
 	'em',
+	'pre',
 	'input'
+];
+let black = [
+	'pre',
+	'code'
 ];
 let red = ['a'];
 
@@ -48,22 +60,27 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 function change() {
     $.each(green, function(){
 		$(this).css({
-			'background-color':'#124829'
+			'background':GREEN,
+			'background-color':GREEN
 		});
 	});
 	$.each(black, function(){
 		$(this).css({
-			'background-color':'#404B46'
+			'background':BLACK,
+			'color':WHITE,
+			'background-color':BLACK
 		});
 	});
 	$.each(white, function(){
 		$(this).css({
-			'color':'#ffffff'
+			'color':WHITE
 		});
 	});
 	$.each(red, function(){
 		$(this).css({
-			'color':'#f7abad'
+			'background':GREEN,
+			'background-color':GREEN,
+			'color':RED
 		});
 	});
 }
