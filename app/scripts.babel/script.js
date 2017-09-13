@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
-const GREEN = '#0F4128';
+const GREEN = '#0f4128';
 const WHITE = '#ffffff';
-const BLACK = '#404B46';
+const BLACK = '#404b46';
 const RED = '#f7abad'
 
 let green = [
@@ -16,20 +16,23 @@ let green = [
 	'section',
 	'div',
 	'blockquote',
+	'samp',
 	'table',
 	'tbody',
 	'tr',
+	'th',
 	'td',
 	'ul',
 	'li',
+	'ol',
 	'dl',
 	'dt',
 	'dd',
-	'span',
-	'a',
+	'p',
 	'footer'
 ];
 let white = [
+	'body',
 	'h1',
 	'h2',
 	'h3',
@@ -37,6 +40,7 @@ let white = [
 	'i',
 	'div',
 	'p',
+	'b',
 	'span',
 	'strong',
 	'td',
@@ -44,6 +48,8 @@ let white = [
 	'code',
 	'em',
 	'pre',
+	'big',
+	'dd',
 	'input'
 ];
 let black = [
@@ -51,15 +57,89 @@ let black = [
 	'code'
 ];
 let red = ['a'];
+let org_green = {};
+let org_black = {};
+let org_white = {};
+let org_red = {};
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request == "blackboard") {
-        change();
-    }
+	if (request == "blackboard")
+	{
+		change();
+	}
+	else if (request == "undo")
+	{
+		undo();
+	}
 });
 
+function undo()
+{
+	over_write(green, org_green);
+	over_write(black, org_black);
+	over_write(white, org_white);
+	over_write(red, org_red);
+}
+
+function over_write(tags, target)
+{
+	$.each(tags, function(){
+		$(this).each(function(index, elem){
+			var id = get_id(elem);
+			var tag_name = $(elem).prop("tagName").toLowerCase();
+			for(var i in target)
+			{
+				if (tag_name != i)
+				{
+					continue;
+				}
+				for(var j in target[i])
+				{
+					if (j != id)
+					{
+						continue;
+					}
+					$(elem).css(target[i][j]);
+					break;
+				}
+			}
+		});
+	});
+}
+
+function get_id(element)
+{
+	var id = $(element).attr('id');
+	if (!id)
+	{
+		id = $(element).attr('class');
+		if (!id)
+		{
+			id = 'null';
+		}
+	}
+	return id;
+}
+
+function original(target, list, property)
+{
+	$.each(list, function(){
+		var css = {};
+		$(this).each(function(i, elem){
+			var id = get_id(elem);
+			css[id] = $(elem).css(property);
+		});
+		target[this] = css;
+	});
+}
+
 function change() {
-    $.each(green, function(){
+	original(org_green, green, ['background', 'background-color']);
+	original(org_black, black, ['background', 'background-color', 'color']);
+	original(org_white, white, ['color']);
+	original(org_red, red, ['background', 'background-color', 'color']);
+
+	$.each(green, function(){
 		$(this).css({
 			'background':GREEN,
 			'background-color':GREEN
