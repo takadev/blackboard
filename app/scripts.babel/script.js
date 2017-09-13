@@ -63,7 +63,6 @@ let org_white = {};
 let org_red = {};
 
 $(function(){
-	chrome.storage.local.get(function(items) { console.log(items) });
 	var key = location.host;
 	chrome.storage.local.get(key, function(value){
 		if ($.isEmptyObject(value))
@@ -78,7 +77,7 @@ $(function(){
 	});
 });
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
 	if (request == "blackboard")
 	{
 		change();
