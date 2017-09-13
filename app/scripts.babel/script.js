@@ -17,6 +17,7 @@ let green = [
 	'div',
 	'blockquote',
 	'samp',
+	'strong',
 	'table',
 	'tbody',
 	'tr',
@@ -41,7 +42,9 @@ let white = [
 	'div',
 	'p',
 	'b',
+	'li',
 	'span',
+	'small',
 	'strong',
 	'td',
 	'cite',
@@ -49,12 +52,12 @@ let white = [
 	'em',
 	'pre',
 	'big',
-	'dd',
-	'input'
+	'dd'
 ];
 let black = [
 	'pre',
-	'code'
+	'code',
+	'input'
 ];
 let red = ['a'];
 let org_green = {};
@@ -152,38 +155,28 @@ function original(target, list, property)
 	});
 }
 
-function change() {
+function change()
+{
 	original(org_green, green, ['background', 'background-color']);
 	original(org_black, black, ['background', 'background-color', 'color']);
 	original(org_white, white, ['color']);
 	original(org_red, red, ['background', 'background-color', 'color']);
 
-	$.each(green, function(){
-		$(this).css({
-			'background':GREEN,
-			'background-color':GREEN
-		});
-	});
-	$.each(black, function(){
-		$(this).css({
-			'background':BLACK,
-			'background-color':BLACK,
-			'color':WHITE
-		});
-	});
-	$.each(white, function(){
-		$(this).css({
-			'color':WHITE
-		});
-	});
-	$.each(red, function(){
-		$(this).css({
-			'background':GREEN,
-			'background-color':GREEN,
-			'color':RED
-		});
-	});
+	css(green, {'background':GREEN, 'background-color':GREEN});
+	css(black, {'background':BLACK, 'background-color':BLACK, 'color':WHITE});
+	css(white, {'color':WHITE});
+	css(red, {'background':GREEN, 'background-color':GREEN, 'color':RED});
+
 	storage();
+}
+
+function css(target, property)
+{
+	$.each(target, function(){
+		$(this).each(function(index, element){
+			$(element).css(property);
+		});
+	});
 }
 
 function storage()
