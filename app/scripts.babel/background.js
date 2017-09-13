@@ -9,3 +9,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.sendMessage(tab.id, message);
     changed = !changed;
 });
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+	changed = request.type;
+});

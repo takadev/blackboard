@@ -62,6 +62,22 @@ let org_black = {};
 let org_white = {};
 let org_red = {};
 
+$(function(){
+	chrome.storage.local.get(function(items) { console.log(items) });
+	var key = location.host;
+	chrome.storage.local.get(key, function(value){
+		if ($.isEmptyObject(value))
+		{
+			return;
+		}
+		chrome.runtime.sendMessage({type:value[key]});
+		if (value[key])
+		{
+			change();
+		}
+	});
+});
+
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	if (request == "blackboard")
 	{
@@ -79,6 +95,7 @@ function undo()
 	over_write(black, org_black);
 	over_write(white, org_white);
 	over_write(red, org_red);
+	remove();
 }
 
 function over_write(tags, target)
@@ -99,6 +116,9 @@ function over_write(tags, target)
 					{
 						continue;
 					}
+					$(elem).css('background','');
+					$(elem).css('background-color','');
+					$(elem).css('color','');
 					$(elem).css(target[i][j]);
 					break;
 				}
@@ -164,4 +184,17 @@ function change() {
 			'color':RED
 		});
 	});
+	storage();
+}
+
+function storage()
+{
+	var entity = {};
+	entity[location.host] = true;
+	chrome.storage.local.set(entity);
+}
+
+function remove()
+{
+	chrome.storage.local.remove(location.host);
 }
