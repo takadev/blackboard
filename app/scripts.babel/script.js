@@ -10,10 +10,13 @@ let green = [
 	'h2',
 	'h3',
 	'h4',
+	'nav',
 	'body',
 	'header',
 	'article',
+	'main',
 	'section',
+	'aside',
 	'div',
 	'blockquote',
 	'samp',
@@ -30,6 +33,7 @@ let green = [
 	'dt',
 	'dd',
 	'p',
+	'b',
 	'footer'
 ];
 let white = [
@@ -48,13 +52,16 @@ let white = [
 	'span',
 	'small',
 	'strong',
+	'figcaption',
+	'th',
 	'td',
 	'cite',
 	'code',
 	'em',
 	'pre',
 	'big',
-	'dd'
+	'dd',
+	'font'
 ];
 let black = [
 	'pre',
