@@ -6,6 +6,7 @@ const BLACK = '#404b46';
 const RED = '#f7abad'
 
 let green = [
+	'html',
 	'h1',
 	'h2',
 	'h3',
@@ -53,6 +54,7 @@ let white = [
 	'small',
 	'strong',
 	'figcaption',
+	'blockquote',
 	'th',
 	'td',
 	'cite',
