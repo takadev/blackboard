@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const GREEN = '#0f4128';
+const GREEN = '#0A2A0A';
 const WHITE = '#ffffff';
 const BLACK = '#404b46';
 const RED = '#f7abad'
