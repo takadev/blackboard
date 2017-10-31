@@ -70,7 +70,7 @@ let black = [
 	'code',
 	'input'
 ];
-let red = ['a'];
+let red = ['a', 'sup'];
 let org_green = {};
 let org_black = {};
 let org_white = {};
