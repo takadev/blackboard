@@ -21,6 +21,7 @@ let green = [
 	'div',
 	'blockquote',
 	'samp',
+	'span',
 	'strong',
 	'table',
 	'tbody',
@@ -131,6 +132,7 @@ function over_write(tags, target)
 					}
 					$(elem).css('background','');
 					$(elem).css('background-color','');
+					$(elem).removeClass('background-image');
 					$(elem).css('color','');
 					$(elem).css(target[i][j]);
 					break;
